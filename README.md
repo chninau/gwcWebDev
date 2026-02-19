@@ -44,7 +44,7 @@ git --version
 
 https://code.visualstudio.com
 
-Recommended extensions:
+Recommended extensions (OPTIONAL--NOT NECESSARY):
 
 * ES7+ React/Redux Snippets
 * Prettier
