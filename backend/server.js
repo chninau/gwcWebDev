@@ -14,12 +14,6 @@ app.use(express.urlencoded({extended: true}));
 app.post("/api/contact", async (req, res) =>{
   const {fullName, email, subject, message} = req.body;
 
-  const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json",
-    //url to the google sheets api 
-    scopes: "https://www.googleapis.com/auth/spreadsheets"
-  });
-
   try{
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",
