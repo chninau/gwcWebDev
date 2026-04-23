@@ -1,6 +1,9 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const { google } = require("googleapis");
+const nodemailer = require("nodemailer");
 
 const app = express();
 
@@ -9,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ─────────────────────────────────────────
-// 📩 SUBSCRIBE ROUTE (was backend A)
+// 📩 SUBSCRIBE ROUTE
 // ─────────────────────────────────────────
 const SUBSCRIBE_SHEET_ID = "17L9FPGphhoO9xOoQ5q_-iVXlPnsiHb92hWbJv3lXBPE";
 
@@ -56,7 +59,7 @@ app.post("/subscribe", async (req, res) => {
 });
 
 // ─────────────────────────────────────────
-// 📬 CONTACT FORM ROUTE (was backend B)
+// 📬 CONTACT FORM ROUTE
 // ─────────────────────────────────────────
 const CONTACT_SHEET_ID = "1nbubAs9g-BdquJcFosqIu-Ww_S8GDMoDhEBobjb133I";
 
@@ -64,6 +67,7 @@ app.post("/api/contact", async (req, res) => {
   const { fullName, email, subject, message } = req.body;
 
   try {
+    // --- Log to Google Sheets ---
     const auth = new google.auth.GoogleAuth({
       keyFile: "credentials.json",
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
@@ -80,6 +84,23 @@ app.post("/api/contact", async (req, res) => {
         values: [[fullName, email, subject, message]],
       },
     });
+
+    // --- Send email ---
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+    from: `"${fullName}" <${process.env.EMAIL_USER}>`,
+    replyTo: email,
+    to: "ingwc@lehigh.edu",
+    subject: `Contact Form: ${subject}`,
+    text: message,  // ← just this
+  });
 
     res.json({ success: true, message: "Message sent successfully!" });
   } catch (error) {
