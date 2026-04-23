@@ -45,7 +45,7 @@ app.post("/api/contact", async (req, res) =>{
     resource:{
       //the values that you want to insert 
       values: [
-        [[fullName, email, subject, message]]
+        [fullName, email, subject, message]
       ]
     }
 
@@ -60,7 +60,7 @@ app.post("/api/contact", async (req, res) =>{
 })
 
 
-app.listen(5173, () => {
+app.listen(3001, () => {
   console.log(`Server running on port 5173`);
 });
 
