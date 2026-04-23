@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+.contact-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #1a2f4a 0%, #16304d 60%, #1a3a5c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.contact-box {
+  background: #1e3a57;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 40px;
+  width: 100%;
+  max-width: 660px;
+}
+
+.contact-title {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0 0 28px 0;
+  letter-spacing: 1px;
+  text-align: left; 
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-row {
+  display: flex;
+  gap: 18px;
+}
+
+.contact-row .contact-field {
+  flex: 1;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-field.half {
+  max-width: 48%;
+}
+
+.contact-field label {
+  color: #c8d8e8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.contact-field input,
+.contact-field textarea {
+  background: #f5f0e8;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: #555;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  transition: box-shadow 0.2s;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  box-shadow: 0 0 0 2px rgba(78, 180, 160, 0.5);
+}
+
+.contact-field textarea {
+  height: 130px;
+  resize: none;
+}
+
+.contact-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.contact-btn {
+  background: #4eb4a0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.contact-btn:hover {
+  background: #3d9e8c;
+}
+
+.status-msg {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.status-msg.success { color: #4eb4a0; }
+.status-msg.error { color: #e07070; }
+
+/* .contact-logo {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+.contact-logo img {
+  height: 60px;
+  object-fit: contain;
+} */
+

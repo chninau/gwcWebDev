@@ -1,5 +1,6 @@
 import { useState } from 'react'; 
 //useState allows for each field, tracking submission status
+import "./ContactUs.css"; 
 
 export default function ContactUs(){
     const [fullName, setFullName] = useState(""); 
@@ -36,33 +37,36 @@ export default function ContactUs(){
     }; 
 
     return(
-        <div>
-            <h1>CONTACT US!</h1>
-            
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>FULL NAME</label>
-                    <input
-                        type="text"
-                        placeholder="Type your name here..."
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        required
-                    />
-                </div>
+        <div className="contact-wrapper">
+            <div className="contact-box">
+                <h1 className="contact-title">CONTACT US!</h1>
 
-                <div>
+                <form onSubmit={handleSubmit} className ="contact-form">
+                <div className = "contact-row">
+                    <div className ="contact-field"> 
+                        <label>FULL NAME</label>
+                        <input
+                            type="text"
+                            placeholder="Type your name here..."
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            required
+                        />
+                        </div>
+
+                <div className="contact-field">
                     <label>EMAIL</label>
                     <input
-                        type="text"
+                        type="email"
                         placeholder="youremail@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
+                    </div>
                 </div>
 
-                <div>
+                <div className="contact-field half">
                     <label>SUBJECT</label>
                     <input
                         type="text"
@@ -73,10 +77,9 @@ export default function ContactUs(){
                     />
                 </div>
 
-                <div>
+                <div className="contact-field">
                     <label>MESSAGE</label>
-                    <input
-                        type="text"
+                    <textarea
                         placeholder="Message Details..."
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
@@ -84,12 +87,15 @@ export default function ContactUs(){
                     />
                 </div>
 
-                <button type="submit">SEND MESSAGE</button>
+                <div className="contact-footer">
+                    <button type="submit" className="contact-btn">SEND MESSAGE</button>
+                </div>
             </form>
 
-            {status === "success" && <p> Message sent successfully!</p>}
-            {status === "error" && <p> Something went wrong. Please try again.</p>}
-        </div>
+    {status === "success" && <p> Message sent successfully!</p>}
+    {status === "error" && <p> Something went wrong. Please try again.</p>}
+    </div>
+    </div>
                     
     );
 }
