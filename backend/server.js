@@ -1,24 +1,21 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const { google } = require("googleapis");
+const nodemailer = require("nodemailer");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// 🔐 Google auth
-const auth = new google.auth.GoogleAuth({
-  keyFile: "credentials.json",
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+// ─────────────────────────────────────────
+// 📩 SUBSCRIBE ROUTE
+// ─────────────────────────────────────────
+const SUBSCRIBE_SHEET_ID = "17L9FPGphhoO9xOoQ5q_-iVXlPnsiHb92hWbJv3lXBPE";
 
-const sheets = google.sheets({ version: "v4", auth });
-
-// 🔗 REPLACE THIS WITH YOUR SHEET ID
-const SPREADSHEET_ID = "17L9FPGphhoO9xOoQ5q_-iVXlPnsiHb92hWbJv3lXBPE";
-
-// 📩 Subscribe endpoint
 app.post("/subscribe", async (req, res) => {
   const { email } = req.body;
 
@@ -27,20 +24,26 @@ app.post("/subscribe", async (req, res) => {
   }
 
   try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: "credentials.json",
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    const sheets = google.sheets({ version: "v4", auth });
+
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
+      spreadsheetId: SUBSCRIBE_SHEET_ID,
       range: "Sheet1!A:A",
     });
 
     const emails = response.data.values || [];
-    const exists = emails.some(row => row[0] === email);
+    const exists = emails.some((row) => row[0] === email);
 
     if (exists) {
       return res.status(400).json({ error: "Email already subscribed" });
     }
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId: SPREADSHEET_ID,
+      spreadsheetId: SUBSCRIBE_SHEET_ID,
       range: "Sheet1!A:B",
       valueInputOption: "RAW",
       requestBody: {
@@ -49,13 +52,64 @@ app.post("/subscribe", async (req, res) => {
     });
 
     res.json({ message: "Subscribed successfully!" });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 });
 
+// ─────────────────────────────────────────
+// 📬 CONTACT FORM ROUTE
+// ─────────────────────────────────────────
+const CONTACT_SHEET_ID = "1nbubAs9g-BdquJcFosqIu-Ww_S8GDMoDhEBobjb133I";
+
+app.post("/api/contact", async (req, res) => {
+  const { fullName, email, subject, message } = req.body;
+
+  try {
+    // --- Log to Google Sheets ---
+    const auth = new google.auth.GoogleAuth({
+      keyFile: "credentials.json",
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    const client = await auth.getClient();
+    const googleSheets = google.sheets({ version: "v4", auth: client });
+
+    await googleSheets.spreadsheets.values.append({
+      auth,
+      spreadsheetId: CONTACT_SHEET_ID,
+      range: "testing",
+      valueInputOption: "USER_ENTERED",
+      resource: {
+        values: [[fullName, email, subject, message]],
+      },
+    });
+
+    // --- Send email ---
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+    from: `"${fullName}" <${process.env.EMAIL_USER}>`,
+    replyTo: email,
+    to: "ingwc@lehigh.edu",
+    subject: `Contact Form: ${subject}`,
+    text: message,  // ← just this
+  });
+
+    res.json({ success: true, message: "Message sent successfully!" });
+  } catch (error) {
+    console.error("Error submitting contact form:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// ─────────────────────────────────────────
 app.get("/", (req, res) => {
   res.send("Backend running 🚀");
 });
