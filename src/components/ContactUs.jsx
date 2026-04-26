@@ -13,7 +13,7 @@ export default function ContactUs(){
         e.preventDefault(); 
 
         try{ 
-            const response = await fetch ("http://localhost:3001/api/contact", {
+            const response = await fetch ("http://localhost:3000/api/contact", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"}, 
                 body: JSON.stringify({fullName, email, subject, message}),
@@ -22,17 +22,21 @@ export default function ContactUs(){
             const data = await response.json(); 
 
             if(data.success){
-                setStatus("success!"); 
+                setStatus("success"); 
                 setFullName(""); 
                 setEmail(""); 
                 setSubject(""); 
                 setMessage(""); 
+                setStatus("success")
+                setTimeout(() => setStatus(""), 3000); //disappears after 3 seconds
             } else{
                 setStatus("error");
+                setTimeout(() => setStatus(""), 3000); 
+
             }
         }catch (err){
             console.error(err); 
-            setStatus("error :("); 
+            setStatus("error"); 
         }
     }; 
 
@@ -92,10 +96,15 @@ export default function ContactUs(){
                 </div>
             </form>
 
-    {status === "success" && <p> Message sent successfully!</p>}
-    {status === "error" && <p> Something went wrong. Please try again.</p>}
+    {status === "success" && <p className ="status-msg success"> Message sent successfully!</p>}
+    {status === "error" && <p className="status-msg error"> Something went wrong. Please try again.</p>}
+
+    <div className="contact-logo">
+        <img src="/gwc-logo.png" alt = "Girls Who Code Lehigh University Logo"/>
+
+     </div>
     </div>
-    </div>
+</div>
                     
     );
 }

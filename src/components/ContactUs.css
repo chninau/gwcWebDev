@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 .contact-wrapper {
-  min-height: 100vh;
-  background: linear-gradient(160deg, #1a2f4a 0%, #16304d 60%, #1a3a5c 100%);
+   height: 1650px; 
+  width: 1728px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,8 @@
 }
 
 .contact-box {
-  background: #1e3a57;
+  background-color: #1e3a57;
+  background-image: linear-gradient(to bottom, #003046, #1E556E);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 8px;
   padding: 40px;
@@ -19,7 +20,7 @@
 }
 
 .contact-title {
-  color: #ffffff;
+  color: #D9D9D9;
   font-family: 'Roboto', sans-serif;
   font-size: 2rem;
   font-weight: 900;
@@ -54,11 +55,12 @@
 }
 
 .contact-field label {
-  color: #c8d8e8;
+  color: #FFF4E7;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'sans-serif';
+  text-align: left; 
 }
 
 .contact-field input,
@@ -96,12 +98,13 @@
 }
 
 .contact-btn {
-  background: #4eb4a0;
+  background: #0D9C90;
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 12px 32px;
-  font-size: 0.85rem;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-family: 'Roboto', 'sans-serif';
   font-weight: 700;
   letter-spacing: 1.5px;
   cursor: pointer;
@@ -122,7 +125,7 @@
 .status-msg.success { color: #4eb4a0; }
 .status-msg.error { color: #e07070; }
 
-/* .contact-logo {
+.contact-logo {
   display: flex;
   justify-content: flex-end;
   margin-top: 24px;
@@ -130,5 +133,23 @@
 .contact-logo img {
   height: 60px;
   object-fit: contain;
-} */
+}
 
+.status-msg{
+  text-align: center; 
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 600;
+  padding: 6px;
+}
+
+.status-msg.success{
+  color: #4eb4a0;
+  background: rgba(224, 112, 112, 0.15); 
+}
+
+.status-msg.error{
+  color: #e07070; 
+  background: rgba(224, 112, 112, 0.15);
+}
