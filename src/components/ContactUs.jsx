@@ -1,6 +1,7 @@
 import { useState } from 'react'; 
 //useState allows for each field, tracking submission status
 import "./ContactUs.css"; 
+import gwcLogo from "../assets/GWC-Logo.svg";
 
 export default function ContactUs(){
     const [fullName, setFullName] = useState(""); 
@@ -100,7 +101,7 @@ export default function ContactUs(){
     {status === "error" && <p className="status-msg error"> Something went wrong. Please try again.</p>}
 
     <div className="contact-logo">
-        <img src="/gwc-logo.png" alt = "Girls Who Code Lehigh University Logo"/>
+        <img src={gwcLogo} alt = "Girls Who Code Lehigh University Logo"/>
 
      </div>
     </div>
