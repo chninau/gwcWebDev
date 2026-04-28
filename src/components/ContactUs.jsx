@@ -1,0 +1,111 @@
+import { useState } from 'react'; 
+//useState allows for each field, tracking submission status
+import "./ContactUs.css"; 
+import gwcLogo from "../assets/GWC-Logo.svg";
+
+export default function ContactUs(){
+    const [fullName, setFullName] = useState(""); 
+    const [email, setEmail] = useState("");
+    const [subject, setSubject] = useState(""); 
+    const [message, setMessage] = useState(""); 
+    const [status, setStatus] = useState(""); 
+
+    const handleSubmit = async (e)  => {
+        e.preventDefault(); 
+
+        try{ 
+            const response = await fetch ("http://localhost:3000/api/contact", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"}, 
+                body: JSON.stringify({fullName, email, subject, message}),
+            });
+
+            const data = await response.json(); 
+
+            if(data.success){
+                setStatus("success"); 
+                setFullName(""); 
+                setEmail(""); 
+                setSubject(""); 
+                setMessage(""); 
+                setStatus("success")
+                setTimeout(() => setStatus(""), 3000); //disappears after 3 seconds
+            } else{
+                setStatus("error");
+                setTimeout(() => setStatus(""), 3000); 
+
+            }
+        }catch (err){
+            console.error(err); 
+            setStatus("error"); 
+        }
+    }; 
+
+    return(
+        <div className="contact-wrapper">
+            <div className="contact-box">
+                <h1 className="contact-title">CONTACT US!</h1>
+
+                <form onSubmit={handleSubmit} className ="contact-form">
+                <div className = "contact-row">
+                    <div className ="contact-field"> 
+                        <label>FULL NAME</label>
+                        <input
+                            type="text"
+                            placeholder="Type your name here..."
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            required
+                        />
+                        </div>
+
+                <div className="contact-field">
+                    <label>EMAIL</label>
+                    <input
+                        type="email"
+                        placeholder="youremail@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    </div>
+                </div>
+
+                <div className="contact-field half">
+                    <label>SUBJECT</label>
+                    <input
+                        type="text"
+                        placeholder="Subject Title..."
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="contact-field">
+                    <label>MESSAGE</label>
+                    <textarea
+                        placeholder="Message Details..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="contact-footer">
+                    <button type="submit" className="contact-btn">SEND MESSAGE</button>
+                </div>
+            </form>
+
+    {status === "success" && <p className ="status-msg success"> Message sent successfully!</p>}
+    {status === "error" && <p className="status-msg error"> Something went wrong. Please try again.</p>}
+
+    <div className="contact-logo">
+        <img src={gwcLogo} alt = "Girls Who Code Lehigh University Logo"/>
+
+     </div>
+    </div>
+</div>
+                    
+    );
+}
