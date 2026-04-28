@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 .contact-wrapper {
-   height: 1650px; 
-  width: 1728px; 
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 
 .contact-box {
@@ -26,7 +25,7 @@
   font-weight: 900;
   margin: 0 0 28px 0;
   letter-spacing: 1px;
-  text-align: left; 
+  text-align: left;
 }
 
 .contact-form {
@@ -59,8 +58,8 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  font-family: 'Roboto', 'sans-serif';
-  text-align: left; 
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
 }
 
 .contact-field input,
@@ -104,7 +103,7 @@
   border-radius: 10px;
   padding: 10px 15px;
   font-size: 15px;
-  font-family: 'Roboto', 'sans-serif';
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   letter-spacing: 1.5px;
   cursor: pointer;
@@ -120,36 +119,38 @@
   margin-top: 12px;
   font-size: 0.9rem;
   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  padding: 6px;
 }
 
-.status-msg.success { color: #4eb4a0; }
-.status-msg.error { color: #e07070; }
+.status-msg.success {
+  color: #4eb4a0;
+  background: rgba(78, 180, 160, 0.15);
+}
+
+.status-msg.error {
+  color: #e07070;
+  background: rgba(224, 112, 112, 0.15);
+}
 
 .contact-logo {
   display: flex;
   justify-content: flex-end;
   margin-top: 24px;
 }
+
 .contact-logo img {
-  height: 200px;
+  height: 120px;
   object-fit: contain;
 }
 
-.status-msg{
-  text-align: center; 
-  margin-top: 12px;
-  font-size: 0.9rem;
-  font-family: 'Roboto', sans-serif; 
-  font-weight: 600;
-  padding: 6px;
-}
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-row {
+    flex-direction: column;
+  }
 
-.status-msg.success{
-  color: #4eb4a0;
-  background: rgba(224, 112, 112, 0.15); 
-}
-
-.status-msg.error{
-  color: #e07070; 
-  background: rgba(224, 112, 112, 0.15);
+  .contact-field.half {
+    max-width: 100%;
+  }
 }

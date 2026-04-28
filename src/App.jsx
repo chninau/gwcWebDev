@@ -1,32 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Navbar from "./components/Navbar";
+import Calendar from "./components/Calendar";
 import ContactUs from "./components/ContactUs";
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-    
+import NewsletterSignup from "./components/NewsletterSignup";
+import "./App.css";
 
 export default function App() {
   return (
     <>
-    <ContactUs />
-    </>
-  )
-}
+      <Navbar />
 
-      <section id="members" className="section">
-        <h2>Members</h2>
-      </section>
+      <main>
+        {/* ── HOME ── */}
+        <section id="title" className="section section--hero">
+          <h1>Girls Who Code</h1>
+          <p>Lehigh University Chapter</p>
+        </section>
 
-      <section id="calendar" className="section">
-        <h2>Calendar</h2>
-      </section>
+        {/* ── ABOUT US ── */}
+        <section id="hooker" className="section">
+          <h2>About Us</h2>
+        </section>
 
-      <section id="design" className="section">
-        <h2>Programs</h2>
-      </section>
+        {/* ── MEMBERS ── */}
+        <section id="members" className="section">
+          <h2>Members</h2>
+        </section>
+
+        {/* ── CALENDAR ── */}
+        <section id="calendar" className="section">
+          <h2>Calendar</h2>
+          <Calendar />
+        </section>
+
+        {/* ── PROGRAMS ── */}
+        <section id="design" className="section">
+          <h2>Programs</h2>
+        </section>
+
+        {/* ── NEWSLETTER ── */}
+        <NewsletterSignup />
+
+        {/* ── CONTACT ── */}
+        <section id="contact" className="section section--contact">
+          <ContactUs />
+        </section>
+      </main>
     </>
   );
 }

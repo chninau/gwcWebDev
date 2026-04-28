@@ -1,0 +1,74 @@
+.navbar {
+  font-family: "Roboto", sans-serif;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 120px;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #0b3c49;
+  cursor: pointer;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  gap: 140px;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+.navbar li {
+  flex-shrink: 0;
+}
+
+.navbar a {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0b3c49;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.navbar a:hover {
+  color: #0d9c90;
+}
+
+.navbar a.active {
+  color: #0d9c90;
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 40px;
+  height: auto;
+  display: block;
+}

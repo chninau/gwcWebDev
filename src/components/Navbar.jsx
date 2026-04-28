@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import gwcLogo from "../assets/GWC_Logo_Blue_Font_.svg";
+import "./Navbar.css";
 
 export default function Navbar() {
   const [active, setActive] = useState("title");
@@ -37,15 +39,12 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* LOGO (KEEP THIS) */}
-      <div
-        className="navbar-left"
-        onClick={() => scrollToSection("title")}
-      >
+      {/* LOGO */}
+      <div className="navbar-left" onClick={() => scrollToSection("title")} style={{ cursor: "pointer" }}>
         <img
-          src="/gwc-logo.svg"
+          src={gwcLogo}
           alt="Girls Who Code logo"
-          style={{ width: "220px", height: "auto" }}
+          style={{ width: "160px", height: "auto" }}
         />
       </div>
 
