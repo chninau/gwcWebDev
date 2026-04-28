@@ -10,45 +10,51 @@ export default function Navbar() {
     { label: "ABOUT US", id: "hooker" },
     { label: "MEMBERS", id: "members" },
     { label: "CALENDAR", id: "calendar" },
-    { label: "PROGRAMS", id: "design" },
+    { label: "CONTACT US", id: "contact" },
   ];
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      const navHeight = 120;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+      setActive(id);
+    }
   };
 
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
+    const handleScroll = () => {
+      const navHeight = 120;
+      const sections = ["title", "hooker", "members", "calendar", "contact"];
+      let current = "title";
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top;
+          if (top <= navHeight + 10) {
+            current = id;
           }
-        });
-      },
-      { threshold: 0.6 }
-    );
+        }
+      }
+      setActive(current);
+    };
 
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav className="navbar">
-      {/* LOGO */}
       <div className="navbar-left" onClick={() => scrollToSection("title")} style={{ cursor: "pointer" }}>
         <img
           src={gwcLogo}
           alt="Girls Who Code logo"
-          style={{ width: "160px", height: "auto" }}
+          style={{ width: "300px", height: "auto" }}
         />
       </div>
 
-      {/* NAV ITEMS */}
       <ul>
         {navItems.map((item) => (
           <li key={item.id}>

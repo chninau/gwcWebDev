@@ -1,0 +1,137 @@
+.members-container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px 60px;
+  background: #f5f0e8;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.members-title {
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #0f3d3e;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+}
+
+.members-layout {
+  display: flex;
+  gap: 30px;
+  flex: 1;
+}
+
+/* LEFT GRID */
+.members-grid {
+  width: 40%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.member-card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.member-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #2a7f7f;
+  transition: 0.2s ease;
+}
+
+.member-card:hover img {
+  transform: scale(1.05);
+}
+
+.member-name {
+  margin: 6px 0 2px;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+}
+
+.member-role {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: #2a7f7f;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* RIGHT SPOTLIGHT */
+.member-spotlight {
+  width: 30%;
+  height: 50%;
+  background: #cff0e8;
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 110px;
+}
+
+.spotlight-main {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+/* IMAGE */
+.spotlight-img {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 5px solid #2a7f7f;
+}
+
+/* TEXT */
+.spotlight-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.spotlight-name {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.spotlight-role {
+  margin: -10px 0 15px;
+  font-size: 22px;
+  color: #2a7f7f;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* META */
+.spotlight-meta p {
+  margin: 10px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2a7f7f;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.spotlight-meta span {
+  font-weight: 700;
+  color: #0f3d3e;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}

@@ -19,9 +19,9 @@
 }
 
 .contact-title {
-  color: #D9D9D9;
+  color: #FFF4E7;
   font-family: 'Roboto', sans-serif;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 900;
   margin: 0 0 28px 0;
   letter-spacing: 1px;
@@ -140,8 +140,9 @@
 }
 
 .contact-logo img {
-  height: 120px;
   object-fit: contain;
+  width: 200px;
+  height: 200px;
 }
 
 /* Responsive */
