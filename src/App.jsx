@@ -8,6 +8,7 @@ function App() {
   const [count, setCount] = useState(0)
     
 
+export default function App() {
   return (
     <>
     <ContactUs />
@@ -15,4 +16,17 @@ function App() {
   )
 }
 
-export default App
+      <section id="members" className="section">
+        <h2>Members</h2>
+      </section>
+
+      <section id="calendar" className="section">
+        <h2>Calendar</h2>
+      </section>
+
+      <section id="design" className="section">
+        <h2>Programs</h2>
+      </section>
+    </>
+  );
+}
