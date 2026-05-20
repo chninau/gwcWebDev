@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import "./Members.css";
+
 const base = import.meta.env.BASE_URL;
 
 const membersData = [
@@ -122,3 +125,62 @@ const membersData = [
     funFact: "I have a twin!",
   },
 ];
+
+export default function Members() {
+  const [selected, setSelected] = useState(membersData[0]);
+
+  return (
+    <div className="members-container">
+      <h1 className="members-title">MEET THE TEAM!</h1>
+
+      <div className="members-layout">
+        {/* LEFT GRID */}
+        <div className="members-grid">
+          {membersData.map((member, index) => (
+            <div
+              key={index}
+              className={`member-card ${
+                selected.name === member.name ? "active" : ""
+              }`}
+              onClick={() => setSelected(member)}
+            >
+              <img src={member.image} alt={member.name} />
+              <p className="member-name">{member.name}</p>
+              <p className="member-role">{member.role}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* RIGHT SPOTLIGHT */}
+        <div className="member-spotlight">
+          <div className="spotlight-main">
+            {/* IMAGE */}
+            <img
+              src={selected.image}
+              alt={selected.name}
+              className="spotlight-img"
+            />
+
+            {/* INFO */}
+            <div className="spotlight-details">
+              <h2 className="spotlight-name">{selected.name}</h2>
+              <h4 className="spotlight-role">{selected.role}</h4>
+
+              <div className="spotlight-meta">
+                <p>
+                  <span>MAJOR:</span> {selected.major}
+                </p>
+                <p>
+                  <span>YEAR:</span> {selected.year}
+                </p>
+                <p>
+                  <span>FUN FACT:</span> {selected.funFact}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
