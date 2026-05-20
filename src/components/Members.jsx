@@ -28,9 +28,9 @@ const membersData = [
   },
   {
     name: "Laura Sommer",
-    role: "Web Development Lead",
+    role: "Treasurer",
     major: "Computer Science",
-    year: "2027",
+    year: "2028",
     image: "/img/laura.jpg",
     funFact: "Has planned events for 500+ people 🎉",
   },
